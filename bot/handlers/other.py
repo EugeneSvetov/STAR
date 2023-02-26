@@ -148,7 +148,7 @@ async def start(msg: Message):
     if check.scalars().all() != []:
         await msg.answer(hello_text)
     else:
-        await msg.answer(hello_text, reply_markup=inline_kb1)
+        await msg.answer(hello_text+'\nА пока скажи какой твой любимый цвет', reply_markup=inline_kb1)
     await UserState.undefined.set()
 
 
@@ -156,8 +156,7 @@ async def process_callback_button1(callback_query: CallbackQuery):
     data = insert(Users).values(name=callback_query.from_user.username,
                                 sentences=str([w.replace('red', callback_query.data) for w in base]),
                                 dislikes=str([]),
-                                favourites=str([]),
-                                memories=str([]))
+                                favourites=str([]))
     await accept(data)
     await callback_query.message.answer("Спасибо за ответ. Я это запомню☺️")
     await UserState.undefined.set()

@@ -3,15 +3,23 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from bot.filters import register_all_filters
 from bot.misc import TgKeys
+import logging
 from bot.handlers.other import scheduler
 from bot.handlers import register_all_handlers
 from bot.database.models import register_models
+
+ADMINS = ['1222211798', '1070932202']
 
 
 async def __on_start_up(dp: Dispatcher) -> None:
     register_all_filters(dp)
     register_all_handlers(dp)
     await register_models()
+    for admin in ADMINS:
+        try:
+            await dp.bot.send_message(admin, "Я проснулась ☺️ Можно написать /start ")
+        except Exception as err:
+            logging.exception(err)
 
 
 def start_bot():
