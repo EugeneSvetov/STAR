@@ -7,8 +7,12 @@ import logging
 from bot.handlers.other import scheduler
 from bot.handlers import register_all_handlers
 from bot.database.models import register_models
+import os
+from dotenv import load_dotenv
 
-ADMINS = ['1222211798', '1070932202']
+load_dotenv()
+
+ADMINS = eval(os.getenv('ADMINS'))
 
 
 async def __on_start_up(dp: Dispatcher) -> None:

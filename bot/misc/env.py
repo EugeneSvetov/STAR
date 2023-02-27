@@ -1,6 +1,8 @@
-from os import environ
 from typing import Final
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class TgKeys:
-    TOKEN: Final = environ.get('TOKEN', '6159625519:AAHTiA6to5tFZZuSL57aYIWMGjVqwy0TNoU')
+    TOKEN: Final = os.getenv('TOKEN')

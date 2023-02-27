@@ -2,8 +2,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import MetaData, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+import os
+from dotenv import load_dotenv
 
-DATABASE_URL = "postgresql+asyncpg://postgres:Pesochek06@localhost"
+load_dotenv()
+
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 engine = create_async_engine(DATABASE_URL)
 Base = declarative_base()
